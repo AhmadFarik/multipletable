@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>جداول الضرب 1-10 | تدريب ممتع</title>
-    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
@@ -15,23 +14,104 @@
         }
 
         body {
-            background: linear-gradient(145deg, #f0f7ff 0%, #d9e9ff 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
             min-height: 100vh;
             padding: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* إنفوجرافيك رياضي - خلفية */
+        .math-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .math-symbol {
+            position: absolute;
+            font-size: 3rem;
+            font-weight: 800;
+            color: rgba(255, 255, 255, 0.08);
+            animation: floatSymbol 15s infinite ease-in-out;
+            user-select: none;
+        }
+
+        @keyframes floatSymbol {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(15deg); }
+        }
+
+        /* ألوان الأرقام */
+        .math-symbol:nth-child(1) { top: 5%; left: 5%; animation-delay: 0s; font-size: 5rem; color: rgba(255, 215, 0, 0.1); }
+        .math-symbol:nth-child(2) { top: 15%; left: 85%; animation-delay: 2s; font-size: 4rem; color: rgba(255, 99, 132, 0.1); }
+        .math-symbol:nth-child(3) { top: 70%; left: 10%; animation-delay: 4s; font-size: 6rem; color: rgba(54, 162, 235, 0.08); }
+        .math-symbol:nth-child(4) { top: 80%; left: 75%; animation-delay: 1s; font-size: 4.5rem; color: rgba(255, 206, 86, 0.1); }
+        .math-symbol:nth-child(5) { top: 40%; left: 50%; animation-delay: 3s; font-size: 7rem; color: rgba(153, 102, 255, 0.06); }
+        .math-symbol:nth-child(6) { top: 55%; left: 25%; animation-delay: 5s; font-size: 3.5rem; color: rgba(75, 192, 192, 0.1); }
+        .math-symbol:nth-child(7) { top: 10%; left: 45%; animation-delay: 2.5s; font-size: 4rem; color: rgba(255, 159, 64, 0.1); }
+        .math-symbol:nth-child(8) { top: 90%; left: 40%; animation-delay: 6s; font-size: 5rem; color: rgba(255, 99, 132, 0.08); }
+        .math-symbol:nth-child(9) { top: 30%; left: 15%; animation-delay: 1.5s; font-size: 3rem; color: rgba(54, 162, 235, 0.1); }
+        .math-symbol:nth-child(10) { top: 65%; left: 90%; animation-delay: 4.5s; font-size: 4.5rem; color: rgba(255, 215, 0, 0.08); }
+
+        /* دوائر ملونة في الخلفية */
+        .circle-bg {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.15;
+            animation: pulseCircle 8s infinite ease-in-out;
+        }
+
+        .circle-1 {
+            width: 300px; height: 300px;
+            background: radial-gradient(circle, #ff6b6b, transparent);
+            top: -100px; right: -100px;
+            animation-delay: 0s;
+        }
+
+        .circle-2 {
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, #4ecdc4, transparent);
+            bottom: -150px; left: -150px;
+            animation-delay: 3s;
+        }
+
+        .circle-3 {
+            width: 200px; height: 200px;
+            background: radial-gradient(circle, #ffe66d, transparent);
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: 5s;
+        }
+
+        @keyframes pulseCircle {
+            0%, 100% { transform: scale(1); opacity: 0.15; }
+            50% { transform: scale(1.3); opacity: 0.08; }
         }
 
         .app-container {
             max-width: 1200px;
             width: 100%;
-            background: rgba(255, 255, 255, 0.75);
-            backdrop-filter: blur(10px);
-            border-radius: 48px;
-            box-shadow: 0 25px 40px rgba(0, 20, 50, 0.2), inset 0 0 0 2px rgba(255, 255, 255, 0.8);
-            padding: 30px;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(20px);
+            border-radius: 50px;
+            box-shadow: 
+                0 30px 60px rgba(0, 20, 50, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.5),
+                inset 0 0 80px rgba(102, 126, 234, 0.05);
+            padding: 35px;
+            position: relative;
+            z-index: 1;
             transition: all 0.3s;
+            border: 2px solid rgba(255, 255, 255, 0.6);
         }
 
         /* الترويسة */
@@ -40,42 +120,60 @@
             flex-wrap: wrap;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             padding-bottom: 20px;
-            border-bottom: 3px dashed #2c6eb0;
+            border-bottom: 4px dashed;
+            border-image: linear-gradient(90deg, #667eea, #764ba2, #f093fb) 1;
         }
 
         .title-section h1 {
             font-size: 2.4rem;
-            color: #1a3c5e;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             display: flex;
             align-items: center;
             gap: 15px;
-            font-weight: 700;
+            font-weight: 800;
             letter-spacing: -1px;
         }
 
         .title-section h1 i {
-            color: #f7b731;
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             font-size: 2.8rem;
-            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+            filter: drop-shadow(0 4px 6px rgba(240, 147, 251, 0.3));
         }
 
         .teacher-badge {
-            background: #1a3c5e;
+            background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
-            padding: 10px 28px;
+            padding: 12px 30px;
             border-radius: 40px;
-            font-weight: 600;
-            font-size: 1.3rem;
-            box-shadow: 0 8px 0 #0b1e2f;
+            font-weight: 700;
+            font-size: 1.2rem;
+            box-shadow: 
+                0 8px 0 #4a3f8a,
+                0 12px 20px rgba(102, 126, 234, 0.3);
             display: flex;
             align-items: center;
             gap: 10px;
+            transition: transform 0.2s;
+        }
+
+        .teacher-badge:hover {
+            transform: translateY(-2px);
+            box-shadow: 
+                0 10px 0 #4a3f8a,
+                0 15px 25px rgba(102, 126, 234, 0.4);
         }
 
         .teacher-badge i {
-            color: #f7b731;
+            color: #ffe66d;
+            font-size: 1.4rem;
         }
 
         /* الأزرار الرئيسية */
@@ -83,49 +181,72 @@
             display: flex;
             gap: 15px;
             flex-wrap: wrap;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         .btn {
             border: none;
             padding: 14px 28px;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 700;
             border-radius: 60px;
             cursor: pointer;
-            transition: 0.2s;
+            transition: all 0.2s;
             display: flex;
             align-items: center;
-            gap: 12px;
-            box-shadow: 0 7px 0 rgba(0, 0, 0, 0.15);
+            gap: 10px;
+            box-shadow: 0 6px 0 rgba(0, 0, 0, 0.15);
             background: white;
             color: #1e3b5a;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
         }
 
         .btn-primary {
-            background: #2c6eb0;
+            background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
-            box-shadow: 0 7px 0 #17426b;
+            box-shadow: 0 6px 0 #4a3f8a, 0 10px 20px rgba(102, 126, 234, 0.3);
         }
 
         .btn-secondary {
-            background: #f7b731;
-            color: #1e2f44;
-            box-shadow: 0 7px 0 #c17f1a;
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            color: white;
+            box-shadow: 0 6px 0 #c0392b, 0 10px 20px rgba(245, 87, 108, 0.3);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #43e97b, #38f9d7);
+            color: #1e3b5a;
+            box-shadow: 0 6px 0 #2d9e5a, 0 10px 20px rgba(67, 233, 123, 0.3);
         }
 
         .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 9px 0 rgba(0, 0, 0, 0.15);
+            transform: translateY(-3px);
+            box-shadow: 0 9px 0 rgba(0, 0, 0, 0.15), 0 15px 25px rgba(0,0,0,0.1);
         }
 
         .btn:active {
-            transform: translateY(5px);
+            transform: translateY(4px);
             box-shadow: 0 2px 0 rgba(0, 0, 0, 0.15);
         }
 
         .btn:disabled {
-            opacity: 0.6;
+            opacity: 0.5;
             transform: translateY(0);
             box-shadow: 0 4px 0 rgba(0, 0, 0, 0.1);
             cursor: not-allowed;
@@ -133,41 +254,104 @@
 
         /* بطاقة السؤال */
         .quiz-card {
-            background: white;
+            background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(240, 245, 255, 0.95));
             border-radius: 40px;
             padding: 35px 25px;
-            box-shadow: 0 15px 30px rgba(0, 30, 60, 0.15), inset 0 1px 5px rgba(255, 255, 255, 0.7);
+            box-shadow: 
+                0 20px 40px rgba(102, 126, 234, 0.15),
+                inset 0 1px 5px rgba(255, 255, 255, 0.7);
             margin-bottom: 30px;
-            border: 2px solid #ffffff;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            position: relative;
         }
 
-        .question-area {
+        .quiz-card::before {
+            content: '✏️';
+            position: absolute;
+            top: -15px;
+            right: 30px;
+            font-size: 2rem;
+            background: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        /* حاوية أسئلة متراكمة */
+        .questions-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+        }
+
+        .question-block {
             text-align: center;
+            padding-bottom: 22px;
+            border-bottom: 2px dashed #d7e6f8;
+            animation: slideIn 0.3s ease;
+            transition: all 0.3s;
+        }
+
+        .question-block:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-15px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
         .question-text {
-            font-size: 2.2rem;
-            color: #153e64;
-            margin-bottom: 20px;
+            font-size: 1.4rem;
+            color: #5a6c8a;
+            margin-bottom: 14px;
             font-weight: 600;
         }
 
+        /* السؤال الأحدث (النشط) */
+        .question-block.active {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(240, 147, 251, 0.05));
+            border-radius: 30px;
+            padding: 25px 15px;
+            border: 2px solid rgba(102, 126, 234, 0.15);
+        }
+
+        .question-block.active .question-text {
+            font-size: 1.8rem;
+            color: #4a3f8a;
+        }
+
         .big-equation {
-            font-size: 4.5rem;
+            font-size: 2.5rem;
             font-weight: 800;
-            color: #1a3c5e;
-            margin: 15px 0 25px;
-            background: #ebf3fe;
-            padding: 20px 40px;
-            border-radius: 100px;
+            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 10px 0 18px;
             display: inline-block;
             line-height: 1.3;
+            letter-spacing: 3px;
+            filter: drop-shadow(0 4px 8px rgba(102, 126, 234, 0.2));
+        }
+
+        .question-block.active .big-equation {
+            font-size: 4.5rem;
             letter-spacing: 5px;
-            box-shadow: inset 0 5px 8px rgba(0,0,0,0.05);
+            animation: glowEquation 2s infinite alternate;
+        }
+
+        @keyframes glowEquation {
+            from { filter: drop-shadow(0 4px 8px rgba(102, 126, 234, 0.2)); }
+            to { filter: drop-shadow(0 8px 16px rgba(240, 147, 251, 0.4)); }
         }
 
         .big-equation span {
-            color: #f7b731;
+            background: linear-gradient(135deg, #f5576c, #f093fb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin: 0 15px;
         }
 
@@ -176,125 +360,238 @@
             flex-wrap: wrap;
             justify-content: center;
             gap: 15px;
-            margin: 25px 0 10px;
+            margin: 20px 0 10px;
         }
 
         .answer-input {
-            font-size: 2rem;
-            width: 220px;
-            padding: 15px 25px;
-            border: 4px solid #c9dff5;
+            font-size: 1.6rem;
+            width: 180px;
+            padding: 12px 20px;
+            border: 4px solid #e0e8f5;
             border-radius: 80px;
             text-align: center;
             font-weight: 700;
-            color: #0c2c48;
+            color: #2c3e50;
             background: #ffffff;
             outline: none;
-            transition: 0.2s;
+            transition: all 0.3s;
+            box-shadow: inset 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .question-block.active .answer-input {
+            font-size: 2rem;
+            width: 220px;
+            padding: 15px 25px;
+            border-color: #667eea;
+            box-shadow: 
+                inset 0 2px 8px rgba(0,0,0,0.05),
+                0 0 0 5px rgba(102, 126, 234, 0.15);
         }
 
         .answer-input:focus {
-            border-color: #2c6eb0;
-            box-shadow: 0 0 0 5px rgba(44, 110, 176, 0.2);
+            border-color: #764ba2;
+            box-shadow: 
+                inset 0 2px 8px rgba(0,0,0,0.05),
+                0 0 0 6px rgba(118, 75, 162, 0.2);
+            transform: scale(1.02);
+        }
+
+        .answer-input:disabled {
+            background: #f3f7fb;
+            color: #a0b3c9;
+            border-color: #d0dceb;
+        }
+
+        .submit-btn {
+            padding: 12px 28px;
+            font-size: 1.1rem;
+        }
+
+        .question-block.active .submit-btn {
+            padding: 15px 35px;
+            font-size: 1.2rem;
         }
 
         .feedback {
-            font-size: 1.6rem;
+            font-size: 1.3rem;
             font-weight: 700;
-            margin-top: 18px;
+            margin-top: 14px;
+            min-height: 2.6rem;
+            padding: 8px;
+            border-radius: 20px;
+            transition: all 0.3s;
+        }
+
+        .question-block.active .feedback {
+            font-size: 1.6rem;
             min-height: 3.2rem;
-            padding: 10px;
         }
 
         .feedback.correct {
             color: #1e7e34;
+            background: linear-gradient(135deg, rgba(67, 233, 123, 0.1), rgba(56, 249, 215, 0.1));
+            animation: bounceIn 0.5s ease;
         }
 
         .feedback.wrong {
             color: #c12b2b;
+            background: linear-gradient(135deg, rgba(245, 87, 108, 0.1), rgba(240, 147, 251, 0.1));
+            animation: shake 0.5s ease;
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-8px); }
+            75% { transform: translateX(8px); }
         }
 
         .stats {
             display: flex;
             justify-content: center;
-            gap: 30px;
-            margin-top: 15px;
+            gap: 25px;
+            margin-top: 25px;
             color: #2c3e50;
-            font-weight: 600;
+            font-weight: 700;
             font-size: 1.2rem;
             flex-wrap: wrap;
         }
 
         .stats span {
-            background: #e9f0fa;
-            padding: 10px 22px;
+            background: linear-gradient(135deg, #f8f9ff, #eef1ff);
+            padding: 12px 25px;
             border-radius: 40px;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+            box-shadow: 0 4px 10px rgba(102, 126, 234, 0.1);
+            border: 1px solid rgba(102, 126, 234, 0.1);
+            transition: transform 0.2s;
         }
+
+        .stats span:hover {
+            transform: translateY(-2px);
+        }
+
+        .stats i {
+            font-size: 1.3rem;
+        }
+
+        .stat-correct i { color: #43e97b; }
+        .stat-wrong i { color: #f5576c; }
 
         /* قسم الجداول */
         .tables-section {
-            background: white;
+            background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(248, 250, 255, 0.98));
             border-radius: 40px;
             padding: 30px;
             margin-top: 25px;
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.12);
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            position: relative;
+        }
+
+        .tables-section::before {
+            content: '📊';
+            position: absolute;
+            top: -15px;
+            left: 30px;
+            font-size: 2rem;
+            background: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
         .section-title {
-            font-size: 1.9rem;
-            color: #1e3b5a;
-            margin-bottom: 20px;
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 25px;
             display: flex;
             align-items: center;
             gap: 15px;
-            border-right: 8px solid #f7b731;
+            border-right: 8px solid;
+            border-image: linear-gradient(180deg, #667eea, #f093fb) 1;
             padding-right: 20px;
+        }
+
+        .section-title i {
+            background: linear-gradient(135deg, #667eea, #f093fb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .tables-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 18px;
+            gap: 20px;
         }
 
         .table-card {
-            background: #f8fcff;
+            background: white;
             border-radius: 25px;
-            padding: 15px 10px;
-            border: 2px solid #d7e6f8;
-            box-shadow: 0 5px 10px rgba(0,0,0,0.03);
-            transition: 0.1s;
-            break-inside: avoid;
+            padding: 15px 12px;
+            border: 2px solid #eef1ff;
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.08);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .table-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+        }
+
+        .table-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.15);
         }
 
         .table-card h3 {
-            background: #2c6eb0;
+            background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
             display: inline-block;
-            padding: 6px 22px;
+            padding: 8px 24px;
             border-radius: 40px;
-            font-size: 1.5rem;
-            margin-bottom: 12px;
+            font-size: 1.4rem;
+            margin-bottom: 14px;
             font-weight: 700;
+            box-shadow: 0 4px 10px rgba(102, 126, 234, 0.3);
         }
 
         .table-lines {
             display: flex;
             flex-direction: column;
             gap: 6px;
-            font-size: 1.15rem;
-            color: #1b3b5c;
+            font-size: 1.1rem;
+            color: #2c3e50;
             font-weight: 500;
         }
 
         .table-lines div {
             display: flex;
             justify-content: space-between;
-            padding: 4px 10px;
-            border-bottom: 1px dashed #cddef0;
+            align-items: center;
+            padding: 6px 12px;
+            border-bottom: 1px dashed #e0e8f5;
+            transition: background 0.2s;
+            border-radius: 10px;
+        }
+
+        .table-lines div:hover {
+            background: #f8faff;
         }
 
         .table-lines div:last-child {
@@ -303,10 +600,12 @@
 
         .table-lines .result {
             font-weight: 800;
-            color: #0b2d4b;
-            background: #e3edfc;
-            padding: 2px 12px;
+            color: white;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            padding: 3px 14px;
             border-radius: 30px;
+            font-size: 1rem;
+            box-shadow: 0 2px 6px rgba(102, 126, 234, 0.3);
         }
 
         /* تذييل */
@@ -314,12 +613,21 @@
             text-align: center;
             margin-top: 30px;
             font-size: 1rem;
-            color: #3e5e7e;
+            color: #5a6c8a;
             font-weight: 600;
+            padding: 15px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(240, 147, 251, 0.05));
         }
 
         .footer i {
-            color: #f7b731;
+            color: #f5576c;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
         }
 
         .hidden {
@@ -328,267 +636,17 @@
 
         /* للطباعة */
         @media print {
-            body {
+            @page {
+                size: A4 landscape;
+                margin: 8mm;
+            }
+            html, body {
                 background: white;
                 padding: 0;
+                height: auto;
             }
-            .app-container {
-                box-shadow: none;
-                background: white;
-                padding: 0;
-            }
-            .nav-buttons, .quiz-card, .btn, .header .teacher-badge, .footer {
+            .math-bg, .circle-bg {
                 display: none !important;
             }
-            .tables-section {
-                box-shadow: none;
-                padding: 0;
-                margin: 0;
-            }
-            .section-title {
-                color: black;
-                border-right-color: #000;
-            }
-            .table-card {
-                break-inside: avoid;
-                border: 1px solid #aaa;
-                background: #fff;
-            }
-            .table-card h3 {
-                background: #e0e0e0;
-                color: black;
-            }
-            .table-lines .result {
-                background: #f0f0f0;
-                color: black;
-            }
-        }
-    </style>
-</head>
-<body>
-<div class="app-container">
-    <!-- الترويسة -->
-    <div class="header">
-        <div class="title-section">
-            <h1>
-                <i class="fas fa-multiplication"></i>
-                جداول الضرب ١-١٠
-            </h1>
-            <p style="font-size: 1.1rem; color: #2c6eb0; font-weight: 500; margin-top: 8px;">
-                <i class="fas fa-graduation-cap"></i> تدريب مستمر لحفظ جداول الضرب
-            </p>
-        </div>
-        <div class="teacher-badge">
-            <i class="fas fa-chalkboard-teacher"></i>
-            إعداد المعلم أحمد فرخ
-        </div>
-    </div>
-
-    <!-- أزرار التنقل -->
-    <div class="nav-buttons">
-        <button class="btn btn-primary" id="newQuestionBtn">
-            <i class="fas fa-dice"></i> سؤال جديد
-        </button>
-        <button class="btn btn-secondary" id="showTablesBtn">
-            <i class="fas fa-table"></i> عرض الجداول كاملة
-        </button>
-        <button class="btn" id="downloadTablesBtn" style="background: #e9f0fa;">
-            <i class="fas fa-download"></i> تحميل الجداول (PDF)
-        </button>
-    </div>
-
-    <!-- بطاقة السؤال والجواب -->
-    <div class="quiz-card" id="quizCard">
-        <div class="question-area">
-            <div class="question-text">
-                <i class="fas fa-question-circle" style="color: #f7b731;"></i>
-                ما هو ناتج ضرب
-            </div>
-            <div class="big-equation" id="equationDisplay">
-                ٥ <span>×</span> ٧
-            </div>
-            <div class="answer-input-area">
-                <input type="number" id="answerInput" class="answer-input" placeholder="؟" min="0" max="150" inputmode="numeric">
-                <button class="btn btn-primary" id="submitAnswerBtn" style="padding: 15px 35px;">
-                    <i class="fas fa-check-circle"></i> تحقق
-                </button>
-            </div>
-            <div class="feedback" id="feedback"></div>
-            <div class="stats">
-                <span><i class="fas fa-star"></i> صحيحة: <span id="correctCount">0</span></span>
-                <span><i class="fas fa-times-circle"></i> خاطئة: <span id="wrongCount">0</span></span>
-            </div>
-        </div>
-    </div>
-
-    <!-- قسم الجداول (مخفي بشكل افتراضي، يظهر عند الضغط) -->
-    <div class="tables-section hidden" id="tablesSection">
-        <div class="section-title">
-            <i class="fas fa-list-ol"></i>
-            جداول الضرب من ١ إلى ١٠ مع الإجابات
-            <span style="font-size: 1rem; background: #f7b731; padding: 5px 15px; border-radius: 30px; color: #1e2f44;">مرتبة ومنظمة</span>
-        </div>
-        <div class="tables-grid" id="tablesGrid">
-            <!-- سيتم توليد الجداول بواسطة JavaScript -->
-        </div>
-        <p style="text-align: center; margin-top: 20px; color: #3e5e7e;">
-            <i class="fas fa-print"></i> يمكنك طباعة هذه الصفحة أو حفظها كـ PDF
-        </p>
-    </div>
-
-    <!-- تذييل -->
-    <div class="footer">
-        <i class="fas fa-heart"></i> تدريب ممتع لطلاب الصف الخامس الأساسي <i class="fas fa-heart"></i>
-        <br>جميع الحقوق محفوظة © المعلم أحمد فرخ
-    </div>
-</div>
-
-<script>
-    (function() {
-        // عناصر DOM
-        const equationDisplay = document.getElementById('equationDisplay');
-        const answerInput = document.getElementById('answerInput');
-        const submitBtn = document.getElementById('submitAnswerBtn');
-        const newQuestionBtn = document.getElementById('newQuestionBtn');
-        const feedbackDiv = document.getElementById('feedback');
-        const correctSpan = document.getElementById('correctCount');
-        const wrongSpan = document.getElementById('wrongCount');
-        const showTablesBtn = document.getElementById('showTablesBtn');
-        const downloadTablesBtn = document.getElementById('downloadTablesBtn');
-        const tablesSection = document.getElementById('tablesSection');
-        const tablesGrid = document.getElementById('tablesGrid');
-        const quizCard = document.getElementById('quizCard');
-
-        // متغيرات الحالة
-        let currentNum1 = 1;
-        let currentNum2 = 1;
-        let correctAnswers = 0;
-        let wrongAnswers = 0;
-        let currentCorrectAnswer = 1;
-
-        // تهيئة الجداول
-        function generateTablesHTML() {
-            let html = '';
-            for (let i = 1; i <= 10; i++) {
-                html += `<div class="table-card">`;
-                html += `<h3>جدول ${i}</h3>`;
-                html += `<div class="table-lines">`;
-                for (let j = 1; j <= 10; j++) {
-                    html += `<div><span>${i} × ${j}</span><span class="result">${i * j}</span></div>`;
-                }
-                html += `</div></div>`;
-            }
-            return html;
-        }
-
-        // ملء الجداول عند التحميل
-        tablesGrid.innerHTML = generateTablesHTML();
-
-        // توليد سؤال عشوائي (من 1 إلى 10)
-        function generateRandomQuestion() {
-            // نطاق من 1 إلى 10 لكلا العددين
-            currentNum1 = Math.floor(Math.random() * 10) + 1;
-            currentNum2 = Math.floor(Math.random() * 10) + 1;
-            currentCorrectAnswer = currentNum1 * currentNum2;
-
-            // تحديث العرض
-            equationDisplay.innerHTML = `${currentNum1} <span>×</span> ${currentNum2}`;
-            answerInput.value = '';
-            answerInput.focus();
-            feedbackDiv.innerHTML = '';
-            feedbackDiv.classList.remove('correct', 'wrong');
-        }
-
-        // التحقق من الإجابة
-        function checkAnswer() {
-            const userAnswer = parseInt(answerInput.value.trim(), 10);
-            if (isNaN(userAnswer)) {
-                feedbackDiv.innerHTML = '<i class="fas fa-exclamation-triangle"></i> الرجاء إدخال رقم صحيح';
-                feedbackDiv.classList.add('wrong');
-                return;
-            }
-
-            if (userAnswer === currentCorrectAnswer) {
-                // إجابة صحيحة
-                correctAnswers++;
-                correctSpan.textContent = correctAnswers;
-                feedbackDiv.innerHTML = '<i class="fas fa-check-circle"></i> أحسنت! الإجابة صحيحة 🌟';
-                feedbackDiv.classList.remove('wrong');
-                feedbackDiv.classList.add('correct');
-                // توليد سؤال جديد بعد تأخير بسيط
-                setTimeout(() => {
-                    generateRandomQuestion();
-                }, 900);
-            } else {
-                // إجابة خاطئة
-                wrongAnswers++;
-                wrongSpan.textContent = wrongAnswers;
-                feedbackDiv.innerHTML = `<i class="fas fa-times-circle"></i> خطأ! الإجابة الصحيحة هي ${currentCorrectAnswer}`;
-                feedbackDiv.classList.remove('correct');
-                feedbackDiv.classList.add('wrong');
-                // السماح بإعادة المحاولة دون تغيير السؤال (اختياري)
-                answerInput.select();
-            }
-        }
-
-        // الأحداث
-        submitBtn.addEventListener('click', checkAnswer);
-
-        answerInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                checkAnswer();
-            }
-        });
-
-        newQuestionBtn.addEventListener('click', () => {
-            generateRandomQuestion();
-            // إعادة تعيين حقول الإدخال دون مسح النتائج
-        });
-
-        // إظهار/إخفاء الجداول
-        showTablesBtn.addEventListener('click', () => {
-            tablesSection.classList.toggle('hidden');
-            if (!tablesSection.classList.contains('hidden')) {
-                showTablesBtn.innerHTML = '<i class="fas fa-eye-slash"></i> إخفاء الجداول';
-                // تمرير إلى الجداول
-                tablesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            } else {
-                showTablesBtn.innerHTML = '<i class="fas fa-table"></i> عرض الجداول كاملة';
-            }
-        });
-
-        // تحميل الجداول كـ PDF (عبر الطباعة)
-        downloadTablesBtn.addEventListener('click', () => {
-            // التأكد من أن قسم الجداول مرئي
-            if (tablesSection.classList.contains('hidden')) {
-                tablesSection.classList.remove('hidden');
-                showTablesBtn.innerHTML = '<i class="fas fa-eye-slash"></i> إخفاء الجداول';
-            }
-            // إخفاء العناصر غير المرغوب بطباعتها باستخدام media print
-            // نستخدم window.print مع إعدادات CSS للطباعة
-            setTimeout(() => {
-                window.print();
-            }, 100);
-        });
-
-        // البدء بسؤال عشوائي
-        generateRandomQuestion();
-
-        // إضافة أيقونة الضرب في الترويسة (fontawesome)
-        // (موجودة بالفعل)
-
-        // تحسين تجربة الإدخال: منع الأرقام السالبة أو الحروف
-        answerInput.addEventListener('input', function() {
-            this.value = this.value.replace(/[^0-9]/g, '');
-            if (this.value.length > 3) this.value = this.value.slice(0,3);
-        });
-
-        // ضبط التركيز عند بدء الصفحة
-        window.addEventListener('load', () => {
-            answerInput.focus();
-        });
-    })();
-</script>
-</body>
-  </html>
+            .app-container {
+  
