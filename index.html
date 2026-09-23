@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>جداول الضرب 1-10 | تدريب ممتع</title>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Tahoma', 'Arial', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(145deg, #f0f7ff 0%, #d9e9ff 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .app-container {
+            max-width: 1200px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(10px);
+            border-radius: 48px;
+            box-shadow: 0 25px 40px rgba(0, 20, 50, 0.2), inset 0 0 0 2px rgba(255, 255, 255, 0.8);
+            padding: 30px;
+            transition: all 0.3s;
+        }
+
+        /* الترويسة */
+        .header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 3px dashed #2c6eb0;
+        }
+
+        .title-section h1 {
+            font-size: 2.4rem;
+            color: #1a3c5e;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .title-section h1 i {
+            color: #f7b731;
+            font-size: 2.8rem;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+        }
+
+        .teacher-badge {
+            background: #1a3c5e;
+            color: white;
+            padding: 10px 28px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 1.3rem;
+            box-shadow: 0 8px 0 #0b1e2f;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .teacher-badge i {
+            color: #f7b731;
+        }
+
+        /* الأزرار الرئيسية */
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            border: none;
+            padding: 14px 28px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 7px 0 rgba(0, 0, 0, 0.15);
+            background: white;
+            color: #1e3b5a;
+        }
+
+        .btn-primary {
+            background: #2c6eb0;
+            color: white;
+            box-shadow: 0 7px 0 #17426b;
+        }
+
+        .btn-secondary {
+            background: #f7b731;
+            color: #1e2f44;
+            box-shadow: 0 7px 0 #c17f1a;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 9px 0 rgba(0, 0, 0, 0.15);
+        }
+
+        .btn:active {
+            transform: translateY(5px);
+            box-shadow: 0 2px 0 rgba(0, 0, 0, 0.15);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            transform: translateY(0);
+            box-shadow: 0 4px 0 rgba(0, 0, 0, 0.1);
+            cursor: not-allowed;
+        }
+
+        /* بطاقة السؤال */
+        .quiz-card {
+            background: white;
+            border-radius: 40px;
+            padding: 35px 25px;
+            box-shadow: 0 15px 30px rgba(0, 30, 60, 0.15), inset 0 1px 5px rgba(255, 255, 255, 0.7);
+            margin-bottom: 30px;
+            border: 2px solid #ffffff;
+        }
+
+        .question-area {
+            text-align: center;
+        }
+
+        .question-text {
+            font-size: 2.2rem;
+            color: #153e64;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .big-equation {
+            font-size: 4.5rem;
+            font-weight: 800;
+            color: #1a3c5e;
+            margin: 15px 0 25px;
+            background: #ebf3fe;
+            padding: 20px 40px;
+            border-radius: 100px;
+            display: inline-block;
+            line-height: 1.3;
+            letter-spacing: 5px;
+            box-shadow: inset 0 5px 8px rgba(0,0,0,0.05);
+        }
+
+        .big-equation span {
+            color: #f7b731;
+            margin: 0 15px;
+        }
+
+        .answer-input-area {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin: 25px 0 10px;
+        }
+
+        .answer-input {
+            font-size: 2rem;
+            width: 220px;
+            padding: 15px 25px;
+            border: 4px solid #c9dff5;
+            border-radius: 80px;
+            text-align: center;
+            font-weight: 700;
+            color: #0c2c48;
+            background: #ffffff;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        .answer-input:focus {
+            border-color: #2c6eb0;
+            box-shadow: 0 0 0 5px rgba(44, 110, 176, 0.2);
+        }
+
+        .feedback {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-top: 18px;
+            min-height: 3.2rem;
+            padding: 10px;
+        }
+
+        .feedback.correct {
+            color: #1e7e34;
+        }
+
+        .feedback.wrong {
+            color: #c12b2b;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 15px;
+            color: #2c3e50;
+            font-weight: 600;
+            font-size: 1.2rem;
+            flex-wrap: wrap;
+        }
+
+        .stats span {
+            background: #e9f0fa;
+            padding: 10px 22px;
+            border-radius: 40px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* قسم الجداول */
+        .tables-section {
+            background: white;
+            border-radius: 40px;
+            padding: 30px;
+            margin-top: 25px;
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .section-title {
+            font-size: 1.9rem;
+            color: #1e3b5a;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-right: 8px solid #f7b731;
+            padding-right: 20px;
+        }
+
+        .tables-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 18px;
+        }
+
+        .table-card {
+            background: #f8fcff;
+            border-radius: 25px;
+            padding: 15px 10px;
+            border: 2px solid #d7e6f8;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.03);
+            transition: 0.1s;
+            break-inside: avoid;
+        }
+
+        .table-card h3 {
+            background: #2c6eb0;
+            color: white;
+            display: inline-block;
+            padding: 6px 22px;
+            border-radius: 40px;
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .table-lines {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            font-size: 1.15rem;
+            color: #1b3b5c;
+            font-weight: 500;
+        }
+
+        .table-lines div {
+            display: flex;
+            justify-content: space-between;
+            padding: 4px 10px;
+            border-bottom: 1px dashed #cddef0;
+        }
+
+        .table-lines div:last-child {
+            border-bottom: none;
+        }
+
+        .table-lines .result {
+            font-weight: 800;
+            color: #0b2d4b;
+            background: #e3edfc;
+            padding: 2px 12px;
+            border-radius: 30px;
+        }
+
+        /* تذييل */
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 1rem;
+            color: #3e5e7e;
+            font-weight: 600;
+        }
+
+        .footer i {
+            color: #f7b731;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* للطباعة */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .app-container {
+                box-shadow: none;
+                background: white;
+                padding: 0;
+            }
+            .nav-buttons, .quiz-card, .btn, .header .teacher-badge, .footer {
+                display: none !important;
+            }
+            .tables-section {
+                box-shadow: none;
+                padding: 0;
+                margin: 0;
+            }
+            .section-title {
+                color: black;
+                border-right-color: #000;
+            }
+            .table-card {
+                break-inside: avoid;
+                border: 1px solid #aaa;
+                background: #fff;
+            }
+            .table-card h3 {
+                background: #e0e0e0;
+                color: black;
+            }
+            .table-lines .result {
+                background: #f0f0f0;
+                color: black;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="app-container">
+    <!-- الترويسة -->
+    <div class="header">
+        <div class="title-section">
+            <h1>
+                <i class="fas fa-multiplication"></i>
+                جداول الضرب ١-١٠
+            </h1>
+            <p style="font-size: 1.1rem; color: #2c6eb0; font-weight: 500; margin-top: 8px;">
+                <i class="fas fa-graduation-cap"></i> تدريب مستمر لحفظ جداول الضرب
+            </p>
+        </div>
+        <div class="teacher-badge">
+            <i class="fas fa-chalkboard-teacher"></i>
+            إعداد المعلم أحمد فرخ
+        </div>
+    </div>
+
+    <!-- أزرار التنقل -->
+    <div class="nav-buttons">
+        <button class="btn btn-primary" id="newQuestionBtn">
+            <i class="fas fa-dice"></i> سؤال جديد
+        </button>
+        <button class="btn btn-secondary" id="showTablesBtn">
+            <i class="fas fa-table"></i> عرض الجداول كاملة
+        </button>
+        <button class="btn" id="downloadTablesBtn" style="background: #e9f0fa;">
+            <i class="fas fa-download"></i> تحميل الجداول (PDF)
+        </button>
+    </div>
+
+    <!-- بطاقة السؤال والجواب -->
+    <div class="quiz-card" id="quizCard">
+        <div class="question-area">
+            <div class="question-text">
+                <i class="fas fa-question-circle" style="color: #f7b731;"></i>
+                ما هو ناتج ضرب
+            </div>
+            <div class="big-equation" id="equationDisplay">
+                ٥ <span>×</span> ٧
+            </div>
+            <div class="answer-input-area">
+                <input type="number" id="answerInput" class="answer-input" placeholder="؟" min="0" max="150" inputmode="numeric">
+                <button class="btn btn-primary" id="submitAnswerBtn" style="padding: 15px 35px;">
+                    <i class="fas fa-check-circle"></i> تحقق
+                </button>
+            </div>
+            <div class="feedback" id="feedback"></div>
+            <div class="stats">
+                <span><i class="fas fa-star"></i> صحيحة: <span id="correctCount">0</span></span>
+                <span><i class="fas fa-times-circle"></i> خاطئة: <span id="wrongCount">0</span></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- قسم الجداول (مخفي بشكل افتراضي، يظهر عند الضغط) -->
+    <div class="tables-section hidden" id="tablesSection">
+        <div class="section-title">
+            <i class="fas fa-list-ol"></i>
+            جداول الضرب من ١ إلى ١٠ مع الإجابات
+            <span style="font-size: 1rem; background: #f7b731; padding: 5px 15px; border-radius: 30px; color: #1e2f44;">مرتبة ومنظمة</span>
+        </div>
+        <div class="tables-grid" id="tablesGrid">
+            <!-- سيتم توليد الجداول بواسطة JavaScript -->
+        </div>
+        <p style="text-align: center; margin-top: 20px; color: #3e5e7e;">
+            <i class="fas fa-print"></i> يمكنك طباعة هذه الصفحة أو حفظها كـ PDF
+        </p>
+    </div>
+
+    <!-- تذييل -->
+    <div class="footer">
+        <i class="fas fa-heart"></i> تدريب ممتع لطلاب الصف الخامس الأساسي <i class="fas fa-heart"></i>
+        <br>جميع الحقوق محفوظة © المعلم أحمد فرخ
+    </div>
+</div>
+
+<script>
+    (function() {
+        // عناصر DOM
+        const equationDisplay = document.getElementById('equationDisplay');
+        const answerInput = document.getElementById('answerInput');
+        const submitBtn = document.getElementById('submitAnswerBtn');
+        const newQuestionBtn = document.getElementById('newQuestionBtn');
+        const feedbackDiv = document.getElementById('feedback');
+        const correctSpan = document.getElementById('correctCount');
+        const wrongSpan = document.getElementById('wrongCount');
+        const showTablesBtn = document.getElementById('showTablesBtn');
+        const downloadTablesBtn = document.getElementById('downloadTablesBtn');
+        const tablesSection = document.getElementById('tablesSection');
+        const tablesGrid = document.getElementById('tablesGrid');
+        const quizCard = document.getElementById('quizCard');
+
+        // متغيرات الحالة
+        let currentNum1 = 1;
+        let currentNum2 = 1;
+        let correctAnswers = 0;
+        let wrongAnswers = 0;
+        let currentCorrectAnswer = 1;
+
+        // تهيئة الجداول
+        function generateTablesHTML() {
+            let html = '';
+            for (let i = 1; i <= 10; i++) {
+                html += `<div class="table-card">`;
+                html += `<h3>جدول ${i}</h3>`;
+                html += `<div class="table-lines">`;
+                for (let j = 1; j <= 10; j++) {
+                    html += `<div><span>${i} × ${j}</span><span class="result">${i * j}</span></div>`;
+                }
+                html += `</div></div>`;
+            }
+            return html;
+        }
+
+        // ملء الجداول عند التحميل
+        tablesGrid.innerHTML = generateTablesHTML();
+
+        // توليد سؤال عشوائي (من 1 إلى 10)
+        function generateRandomQuestion() {
+            // نطاق من 1 إلى 10 لكلا العددين
+            currentNum1 = Math.floor(Math.random() * 10) + 1;
+            currentNum2 = Math.floor(Math.random() * 10) + 1;
+            currentCorrectAnswer = currentNum1 * currentNum2;
+
+            // تحديث العرض
+            equationDisplay.innerHTML = `${currentNum1} <span>×</span> ${currentNum2}`;
+            answerInput.value = '';
+            answerInput.focus();
+            feedbackDiv.innerHTML = '';
+            feedbackDiv.classList.remove('correct', 'wrong');
+        }
+
+        // التحقق من الإجابة
+        function checkAnswer() {
+            const userAnswer = parseInt(answerInput.value.trim(), 10);
+            if (isNaN(userAnswer)) {
+                feedbackDiv.innerHTML = '<i class="fas fa-exclamation-triangle"></i> الرجاء إدخال رقم صحيح';
+                feedbackDiv.classList.add('wrong');
+                return;
+            }
+
+            if (userAnswer === currentCorrectAnswer) {
+                // إجابة صحيحة
+                correctAnswers++;
+                correctSpan.textContent = correctAnswers;
+                feedbackDiv.innerHTML = '<i class="fas fa-check-circle"></i> أحسنت! الإجابة صحيحة 🌟';
+                feedbackDiv.classList.remove('wrong');
+                feedbackDiv.classList.add('correct');
+                // توليد سؤال جديد بعد تأخير بسيط
+                setTimeout(() => {
+                    generateRandomQuestion();
+                }, 900);
+            } else {
+                // إجابة خاطئة
+                wrongAnswers++;
+                wrongSpan.textContent = wrongAnswers;
+                feedbackDiv.innerHTML = `<i class="fas fa-times-circle"></i> خطأ! الإجابة الصحيحة هي ${currentCorrectAnswer}`;
+                feedbackDiv.classList.remove('correct');
+                feedbackDiv.classList.add('wrong');
+                // السماح بإعادة المحاولة دون تغيير السؤال (اختياري)
+                answerInput.select();
+            }
+        }
+
+        // الأحداث
+        submitBtn.addEventListener('click', checkAnswer);
+
+        answerInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                checkAnswer();
+            }
+        });
+
+        newQuestionBtn.addEventListener('click', () => {
+            generateRandomQuestion();
+            // إعادة تعيين حقول الإدخال دون مسح النتائج
+        });
+
+        // إظهار/إخفاء الجداول
+        showTablesBtn.addEventListener('click', () => {
+            tablesSection.classList.toggle('hidden');
+            if (!tablesSection.classList.contains('hidden')) {
+                showTablesBtn.innerHTML = '<i class="fas fa-eye-slash"></i> إخفاء الجداول';
+                // تمرير إلى الجداول
+                tablesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } else {
+                showTablesBtn.innerHTML = '<i class="fas fa-table"></i> عرض الجداول كاملة';
+            }
+        });
+
+        // تحميل الجداول كـ PDF (عبر الطباعة)
+        downloadTablesBtn.addEventListener('click', () => {
+            // التأكد من أن قسم الجداول مرئي
+            if (tablesSection.classList.contains('hidden')) {
+                tablesSection.classList.remove('hidden');
+                showTablesBtn.innerHTML = '<i class="fas fa-eye-slash"></i> إخفاء الجداول';
+            }
+            // إخفاء العناصر غير المرغوب بطباعتها باستخدام media print
+            // نستخدم window.print مع إعدادات CSS للطباعة
+            setTimeout(() => {
+                window.print();
+            }, 100);
+        });
+
+        // البدء بسؤال عشوائي
+        generateRandomQuestion();
+
+        // إضافة أيقونة الضرب في الترويسة (fontawesome)
+        // (موجودة بالفعل)
+
+        // تحسين تجربة الإدخال: منع الأرقام السالبة أو الحروف
+        answerInput.addEventListener('input', function() {
+            this.value = this.value.replace(/[^0-9]/g, '');
+            if (this.value.length > 3) this.value = this.value.slice(0,3);
+        });
+
+        // ضبط التركيز عند بدء الصفحة
+        window.addEventListener('load', () => {
+            answerInput.focus();
+        });
+    })();
+</script>
+</body>
+  </html>
